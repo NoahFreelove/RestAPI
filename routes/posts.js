@@ -1,15 +1,24 @@
 const express = require('express');
-
+const Post = require('../models/Post')
 const router = express.Router();
 
-router.route('/')
-    .get((req, res) => {
-        res.send("Post Home Page")
+router.get('/',(req, res) => {
+        res.send("Post Home Pages")
     });
 
-router.route('/1234')
-    .get((req, res) => {
-        res.send("1234 Page")
+router.post("/", (req, res) =>{
+    const post = new Post({
+        title: req.body.title,
+        description: req.body.description,
+        userId: req.body.userId
     });
+
+    post.save().then(data=>{
+        res.json(data + "saved")
+    })
+        .catch(err=>{
+            res.json({message: err})
+        });
+});
 
 module.exports = router;
