@@ -2,6 +2,7 @@ const express = require('express');
 const Post = require('../models/Post')
 const router = express.Router();
 
+// get all posts
 router.get('/', async(req, res) => {
         try {
             const posts = await Post.find();
@@ -11,12 +12,12 @@ router.get('/', async(req, res) => {
             res.json({message: e});
         }
     });
-
+// submit post
 router.post("/", async (req, res) => {
     const post = new Post({
         title: req.body.title,
         description: req.body.description,
-        userId: req.body.userId
+        userName: req.body.userName
     });
 
     try {
@@ -26,9 +27,18 @@ router.post("/", async (req, res) => {
     {
         res.json({message: e});
     }
-
-
-
 });
+
+// get specific post
+router.get('/:postId', async (req,res)=>{
+    try {
+        const post = await Post.findById(req.params.postId)
+        res.json(post)
+    } catch (e)
+    {
+        res.json({message: "No such post"})
+    }
+
+})
 
 module.exports = router;

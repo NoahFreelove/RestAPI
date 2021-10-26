@@ -9,11 +9,8 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    userName:{
-      type: String
-    },
-    userId: {
-        type: Number,
+    userName: {
+        type: String,
         required: true
     },
 });
