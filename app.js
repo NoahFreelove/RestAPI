@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use('/posts', postsRoute);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my Nodemon API!');
+  res.send('To view a post go to /posts/');
 });
 
 //Connect to db
